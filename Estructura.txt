@@ -1,0 +1,29 @@
+multiplicacion_matrices/
+├── src/
+│   ├── secuencial/
+│   │   └── multimat_seq_opt.c
+│   ├── openmp/
+│   │   └── multimat_openmp_opt.c
+│   ├── pthreads/
+│   │   └── multimat_pthreads_opt.c
+│   ├── mpi/
+│   │   └── multimat_mpi_opt.c
+│   └── cuda/
+│       └── multimat_cuda_opt.cu
+│
+├── include/
+│   ├── common.h
+│   ├── simd.h
+│   └── timer.h
+│
+├── scripts/
+│   ├── build_openmp.sh
+│   ├── build_mpi.sh
+│   ├── build_cuda.sh
+│   └── run_tests.sh
+│
+├── results/
+│   ├── tiempos.csv
+│   └── speedup.csv
+│
+└── README.md
