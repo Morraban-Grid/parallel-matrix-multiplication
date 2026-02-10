@@ -52,3 +52,6 @@ Thumbs.db
 # =========================
 .git-credentials
 .env
+
+multimat_*
+Estructura.txt
