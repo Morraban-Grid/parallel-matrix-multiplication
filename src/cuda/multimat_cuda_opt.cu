@@ -70,7 +70,7 @@ int main() {
     cudaMemcpy(d_A, h_A, bytes, cudaMemcpyHostToDevice);
     cudaMemcpy(d_B, h_B, bytes, cudaMemcpyHostToDevice);
 
-    // Configure CUDA execution grid
+    // Configure CUDA execution gri
     dim3 threads(BLOCK_SIZE, BLOCK_SIZE);
     dim3 blocks(
         (MAX + BLOCK_SIZE - 1) / BLOCK_SIZE,
