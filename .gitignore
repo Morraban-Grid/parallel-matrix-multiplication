@@ -1,0 +1,53 @@
+# =========================
+# Compiled / Binaries
+# =========================
+*.out
+*.exe
+*.o
+*.so
+*.a
+*.dll
+
+# =========================
+# Build folders
+# =========================
+build/
+bin/
+dist/
+
+# =========================
+# CUDA / MPI Temporaries
+# =========================
+*.ptx
+*.cubin
+
+# =========================
+# Logs and Dumps
+# =========================
+*.log
+core
+core.*
+
+# =========================
+# Benchmark Results (DO NOT UPLOAD)
+# =========================
+results/*.csv
+
+# =========================
+# System Files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Editor Files
+# =========================
+.vscode/
+.idea/
+*.swp
+
+# =========================
+# Credentials (VERY IMPORTANT)
+# =========================
+.git-credentials
+.env
