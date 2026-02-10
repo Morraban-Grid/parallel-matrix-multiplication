@@ -5,15 +5,17 @@
 #define N 500
 #define BLOCK_SIZE 32
 
+// Global matrices stored in static memory
 double A[N][N];
 double B[N][N];
 double C[N][N];
 
-/*
- * Inicialización de matrices:
- * A -> matriz identidad
- * B -> valores constantes dependientes de la fila
- * C -> matriz resultado inicializada en cero
+/**
+ * @brief Initialize matrices for multiplication.
+ *
+ * - A is initialized as an identity matrix.
+ * - B contains row-dependent constant values.
+ * - C is initialized to zero.
  */
 void init_matrices() {
     for (int i = 0; i < N; i++) {
@@ -25,9 +27,11 @@ void init_matrices() {
     }
 }
 
-/*
- * Multiplicación secuencial de matrices
- * utilizando bloqueo para mejorar la localidad de caché
+/**
+ * @brief Sequential blocked matrix multiplication.
+ *
+ * This implementation uses loop tiling (blocking) to improve cache locality.
+ * The multiplication is performed in sub-blocks of size BLOCK_SIZE x BLOCK_SIZE.
  */
 void multiply_blocked() {
     for (int ii = 0; ii < N; ii += BLOCK_SIZE) {
@@ -38,9 +42,12 @@ void multiply_blocked() {
                     for (int j = jj; j < jj + BLOCK_SIZE && j < N; j++) {
 
                         double sum = C[i][j];
+
+                        // Compute partial dot product for the current block
                         for (int k = kk; k < kk + BLOCK_SIZE && k < N; k++) {
                             sum += A[i][k] * B[k][j];
                         }
+
                         C[i][j] = sum;
                     }
                 }
@@ -50,9 +57,10 @@ void multiply_blocked() {
     }
 }
 
-/*
- * Validación básica del resultado:
- * Dado que A es identidad, el resultado C debe ser igual a B
+/**
+ * @brief Validate the result of the multiplication.
+ *
+ * Since A is the identity matrix, the result C should be identical to B.
  */
 void validate_result() {
     int correct = 1;
@@ -68,11 +76,19 @@ void validate_result() {
     }
 
     if (correct)
-        printf("Validacion: CORRECTA (C = B)\n");
+        printf("Validation: CORRECT (C = B)\n");
     else
-        printf("Validacion: ERROR en el resultado\n");
+        printf("Validation: ERROR in result\n");
 }
 
+/**
+ * @brief Program entry point.
+ *
+ * Measures execution time of the blocked sequential matrix multiplication
+ * and performs a basic validation of the result.
+ *
+ * @return int Program exit status.
+ */
 int main() {
     clock_t start, end;
     double elapsed_time;
@@ -85,7 +101,7 @@ int main() {
 
     elapsed_time = (double)(end - start) / CLOCKS_PER_SEC;
 
-    printf("Tiempo de ejecucion (secuencial base): %.3f segundos\n", elapsed_time);
+    printf("Execution time (sequential blocked): %.3f seconds\n", elapsed_time);
     printf("C[0][0] = %.2f | B[0][0] = %.2f\n", C[0][0], B[0][0]);
 
     validate_result();
